@@ -1,0 +1,4 @@
+* EXCEPTION: uninitialized constant ToggleSwitch
+** Backtrace:
+*** app/main.rb:4:in init
+*** app/main.rb:9:in tick
