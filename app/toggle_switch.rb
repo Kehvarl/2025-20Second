@@ -5,8 +5,8 @@ class Toggle_Switch
   def initialize args={}
     @x = args.x || 1200
     @y = args.y || 540
-    @w = args.w || 32
-    @h = args.h || 64
+    @w = args.w || 48
+    @h = args.h || 96
     @path = args.path ||  "sprites/switches/run_stop_anim.png"
     @source_x = args.source_x || 128
     @source_y = args.source_y || 0
