@@ -1,4 +1,8 @@
-* EXCEPTION: uninitialized constant ToggleSwitch
+* EXCEPTION:
+* ERROR:
+Undefined method s for main.
+
+
 ** Backtrace:
-*** app/main.rb:4:in init
-*** app/main.rb:9:in tick
+*** app/main.rb:56:in calculate
+*** app/main.rb:68:in tick
