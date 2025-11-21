@@ -6,6 +6,9 @@ class Display_Line
     @y = args.y || 0
     @w = args.w || 720
     @h = args.h || 64
+    @led_w = args.led_w || 16
+    @led_h = args.led_h || 16
+    @led_spacing = args.led_spacing || 8
     @segments = args.segments || 5
     @output = []
     @segments.times do |t|
@@ -14,8 +17,10 @@ class Display_Line
   end
 
   def make_segment index, color
-    w = @w / @segments
-    {x:index*w+@x, y:@y, w:16, h:16, path: "sprites/led_gs.png", **color}.sprite!
+    segment_w = @w / @segments
+    x = @x + index * segment_w + index * @led_spacing + (segment_w - @led_w) / 2
+    y = @y + (@h - @led_h) / 2
+    {x:x, y:y, w:@led_w, h:@led_h, path: "sprites/led_gs.png", **color}.sprite!
   end
 
   def store_state (correct, incorrect, invalid)
@@ -35,7 +40,7 @@ def init args
   (0...5).each do |x|
     args.state.switches << Toggle_Switch.new({x:x*50 + 220,y:640})
   end
-  args.state.display = Display_Line.new({x:220, y:900, w:280, h:64})
+  args.state.display = Display_Line.new({x:220, y:900, w:80, h:16})
 end
 
 def calculate args
