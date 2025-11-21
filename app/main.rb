@@ -9,14 +9,13 @@ class Display_Line
     @segments = args.segments || 5
     @output = []
     @segments.times do |t|
-      puts t
       @output << make_segment(t, {r:128, g:128, b:128})
     end
   end
 
   def make_segment index, color
     w = @w / @segments
-    {x:index*w+@x, y:@y, w:w, h:@h, **color}.solid!
+    {x:index*w+@x, y:@y, w:16, h:16, path: "sprites/led_gs.png", **color}.sprite!
   end
 
   def store_state (correct, incorrect, invalid)
