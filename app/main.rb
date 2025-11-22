@@ -72,4 +72,5 @@ def tick args
                               size_enum: 20, text:"#{calculate(args)}"}.label!
   args.outputs.primitives << args.state.display.render
   args.outputs.primitives << {x:500, y:640, w:96, h:96, path:"sprites/button_gs.png", r:255, g:0, b:0}.sprite!
+  args.outputs.primitives << {x:300, y:840, w:64, h:96, path:"sprites/7s-64x96.png"}.sprite!
 end
