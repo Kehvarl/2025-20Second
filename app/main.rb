@@ -6,7 +6,7 @@ def init args
   (0...5).each do |x|
     args.state.switches << Toggle_Switch.new({x:x*50 + 220,y:640})
   end
-  args.state.display = Display_Line.new({x:220, y:900, w:80, h:16})
+  args.state.display = Display.new()
 end
 
 def calculate args
@@ -23,7 +23,9 @@ def calculate args
     end
     output |= s.status
   end
-  args.state.display.store_state(states[0],states[1],states[2])
+  if args.inputs.keyboard.key_up.enter
+    args.state.display.add_line(states)
+  end
   return output
 end
 

@@ -36,16 +36,23 @@ end
 class Display
     def initialize
         @x = 110
-        @y = 400
+        @y = 100
         @w = 500
-        @h = 380
+        @h = 480
         @lines = []
+    end
+
+    def add_line state
+        y = @y + @h - ((@lines.count+1)*64)
+        line = Display_Line.new({x:@x, y:y, w:@w, h:20})
+        line.store_state(state[0], state[1], state[2])
+        @lines << line
     end
 
     def render
         out = []
-        out << {x:@x, y:@y, w:@w, h:@h. r:128, g:128, b:128}.solid!
-        out << {x:@x, y:@y, w:@w, h:@h. r:192, g:192, b:192}.border!
+        out << {x:@x, y:@y, w:@w, h:@h, r:128, g:128, b:128}.solid!
+        out << {x:@x, y:@y, w:@w, h:@h, r:192, g:192, b:192}.border!
         @lines.each do |l|
             out << l.render()
         end
