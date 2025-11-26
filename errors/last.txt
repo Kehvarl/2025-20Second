@@ -1,19 +1,4 @@
-* EXCEPTION:
-* ERROR - :to_int method missing on ~Time~.
-
-#+begin_src ~Time#inspect~
-2025-11-25 19:39:25 -0700
-#+end_src ~Time#inspect~
-
-** Did you mean?
-Here's a list of methods that kind of look like :to_int.
-*** :to_i
-
-The method named
-  :to_int
-doesn't exist on [Time, #<Class:#<Time:0x2afe0260>>, Comparable].
-
-(suggestions above)
+* EXCEPTION: comparison of String with Integer failed
 ** Backtrace:
-*** app/main.rb:39:in init
-*** app/main.rb:65:in tick
+*** app/main.rb:66:in get_timer
+*** app/main.rb:96:in tick
