@@ -36,6 +36,7 @@ def init args
   end
   args.state.button = Button.new({x:500, y:640, w:96, h:96})
   args.state.display = Display.new()
+  args.state.count_to = Time.now + 20.0
 end
 
 def calculate args
@@ -59,6 +60,10 @@ def calculate args
   return output
 end
 
+def get_timer args
+  "%.2f" % (args.state.count_to - Time.now)
+end
+
 def tick args
   if Kernel.tick_count <= 0
       init args
@@ -68,7 +73,7 @@ def tick args
 
   args.outputs.primitives << {x:0, y:0, w:720, h:1280, r:0, g:0, b:0}.solid!
   args.outputs.primitives << args.state.switches
-  #args.outputs.primitives << {x:430, y:800, w:50, h:50, r:0, g:196, b:0, size_enum: 20, text:"#{calculate(args)}"}.label!
+  args.outputs.primitives << {x:430, y:800, w:50, h:50, r:0, g:196, b:0, size_enum: 20, text:"#{get_timer(args)}"}.label!
   args.outputs.primitives << args.state.display.render
   args.outputs.primitives << args.state.button
   args.outputs.primitives << {x:300, y:840, w:64, h:96, path:"sprites/7s-64x96.png"}.sprite!
