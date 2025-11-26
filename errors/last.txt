@@ -1,17 +1,4 @@
-* EXCEPTION:
-* ERROR - :status method missing on ~Button~.
-
-#+begin_src ~Button#inspect~
-#<Button:0x2164470 @held=false, @h=96, @x=500, @g=0, @b=0, @w=96, @y=640, @r=255, @path="sprites/button_gs.png", @status=false>
-#+end_src ~Button#inspect~
-
-
-
-The method named
-  :status
-doesn't exist on [Button, #<Class:#<Button:0x2164470>>, AttrSprite, AttrRect].
-
-(suggestions above)
+* EXCEPTION: comparison of String with Integer failed
 ** Backtrace:
-*** app/main.rb:54:in calculate
-*** app/main.rb:70:in tick
+*** app/main.rb:66:in get_timer
+*** app/main.rb:96:in tick
