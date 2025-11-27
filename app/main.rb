@@ -1,41 +1,13 @@
-require 'app/toggle_switch.rb'
+require 'app/switch.rb'
 require 'app/display.rb'
-
-class Button
-  attr_sprite
-  attr_accessor :status, :held
-  def initialize args={}
-    @x = args.x
-    @y = args.y
-    @w = args.w
-    @h = args.h
-    @path = "sprites/button_gs.png"
-    @r = args.r || 255
-    @g = args.g || 0
-    @b = args.b || 0
-
-    @status = false
-    @held = false
-  end
-
-  def tick args
-    if !@held and (args.inputs.mouse.button_left and args.inputs.mouse.inside_rect?(self))
-      @status = true
-      @held = true
-    elsif !args.inputs.mouse.button_left
-      @held = false
-    end
-  end
-end
-
 
 def init args
   args.state.game_over = false
   args.state.switches = []
   (0...5).each do |x|
-    args.state.switches << Toggle_Switch.new({x:x*50 + 220,y:640})
+    args.state.switches << Toggle_Switch.new({x:x*50 + 220,y:640, w:48, h:96})
   end
-  args.state.button = Button.new({x:500, y:640, w:96, h:96})
+  args.state.button = Pushbutton.new({x:500, y:640, w:96, h:96, source_w:64, source_h:32})
   args.state.display = Display.new()
   args.state.count_to = Time.now + 20.0
 end
@@ -90,6 +62,11 @@ def tick args
 
   args.state.switches.each {|s| s.tick(args)}
   args.state.button.tick(args)
+
+  if args.state.button.status > 0
+      calculate(args)
+      args.state.button.status = 0
+  end
 
   args.outputs.primitives << {x:0, y:0, w:720, h:1280, r:0, g:0, b:0}.solid!
   args.outputs.primitives << args.state.switches
