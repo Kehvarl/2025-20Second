@@ -5,8 +5,8 @@ class Switch
   def initialize args={}
     @x = args.x || 1200
     @y = args.y || 540
-    @w = args.w || 32
-    @h = args.h || 64
+    @w = args.w || 48
+    @h = args.h || 96
     @path = args.path ||  "sprites/switches/run_stop_anim.png"
     @source_x = args.source_x || 0
     @source_y = args.source_y || 0
@@ -79,9 +79,13 @@ class Toggle_Switch < Switch
   end
 end
 
-class Momentary_Switch < Switch
+class Pushbutton < Switch
   def initialize args={}
     super(args)
+    @path = "sprites/button_gs.png"
+    @r = args.r || 255
+    @g = args.g || 0
+    @b = args.b || 0
     @direction = 1
   end
 
@@ -99,14 +103,14 @@ class Momentary_Switch < Switch
   def animate args
     if @animating
       if @direction == 1
-        if @source_x < 128
-          @source_x += @sprite_width
+        if @r > 128
+          @r -= 16
         else
           @direction = 0
         end
       else
-        if @source_x > 0
-          @source_x -= @sprite_width
+        if @r < 255
+          @r += 16
         else
           @direction = 1
           @animating = false

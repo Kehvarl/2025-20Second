@@ -4,8 +4,8 @@ class Display_Line
     @y = args.y || 0
     @w = args.w || 720
     @h = args.h || 64
-    @led_w = args.led_w || 16
-    @led_h = args.led_h || 16
+    @led_w = args.led_w || 32
+    @led_h = args.led_h || 32
     @led_spacing = args.led_spacing || 8
     @segments = args.segments || 5
     @output = []
@@ -23,8 +23,8 @@ class Display_Line
 
   def store_state (correct, incorrect, invalid)
     @output = []
-    correct.times {|t| @output << make_segment(t, {r:0, g:196, b:0})}
-    incorrect.times {|t| @output << make_segment(t + correct, {r:196, g:196, b:0})}
+    correct.times {|t| @output << make_segment(t, {r:0, g:255, b:0})}
+    incorrect.times {|t| @output << make_segment(t + correct, {r:255, g:255, b:0})}
     invalid.times {|t| @output << make_segment(t + correct + incorrect, {r:128, g:128, b:128})}
   end
 
