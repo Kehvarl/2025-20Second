@@ -1,4 +1,5 @@
 class Display_Line
+  attr_accessor :x, :y, :w, :h, :led_w, :led_h, :segments
   def initialize args={}
     @x = args.x || 0
     @y = args.y || 0
@@ -15,9 +16,11 @@ class Display_Line
   end
 
   def make_segment index, color
-    segment_w = @w / @segments
-    x = @x + index * segment_w + index * @led_spacing + (segment_w - @led_w) / 2
-    y = @y + (@h - @led_h) / 2
+    total_gaps = (@segments - 1) * @led_spacing
+    spacing = @w - total_gaps
+    segment_w = spacing.to_f / @segments
+    x = index * (segment_w + @led_spacing) + (segment_w - @led_w) / 2.0
+    y = (@h - @led_h) / 2
     {x:x, y:y, w:@led_w, h:@led_h, path: "sprites/led_gs.png", **color}.sprite!
   end
 
@@ -28,8 +31,15 @@ class Display_Line
     invalid.times {|t| @output << make_segment(t + correct + incorrect, {r:128, g:128, b:128})}
   end
 
-  def render
-    @output
+  def render x, y
+    out = []
+    @output.each do |s|
+      c = s.copy
+      c.x += x
+      c.y += y
+      out << c
+    end
+    out
   end
 end
 
@@ -39,22 +49,33 @@ class Display
         @y = 100
         @w = 500
         @h = 480
+        @row_height = 64
+        @max_rows = (@h / @row_height).floor
         @lines = []
+
+        @max_rows.times do
+          line = Display_Line.new({ x:@x-16, y:0, w:@w, h:20})
+          line.store_state(0, 0, line.segments)
+          @lines << line
+        end
     end
 
     def add_line state
-        y = @y + @h - ((@lines.count+1)*64)
-        line = Display_Line.new({x:@x-16, y:y, w:@w, h:20})
+        #y = @y + @h - ((@lines.count+1)*64)
+        line = Display_Line.new({x:@x-16, y:0, w:@w, h:20})
         line.store_state(state[0], state[1], state[2])
-        @lines << line
+        @lines.unshift(line)
     end
 
     def render
         out = []
         out << {x:@x, y:@y, w:@w, h:@h, r:96, g:96, b:96}.solid!
         out << {x:@x, y:@y, w:@w, h:@h, r:128, g:128, b:128}.border!
-        @lines.each do |l|
-            out << l.render()
+
+        visible = @lines.first(@max_rows)
+        visible.each_with_index do |line, i|
+          line_y = @y + @h - ((i + 1) * @row_height)
+          out << line.render(@x, line_y)
         end
 
         out
