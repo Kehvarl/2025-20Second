@@ -50,7 +50,6 @@ def game_over_tick args
 
 end
 
-
 def tick args
   if Kernel.tick_count <= 0
       init args
