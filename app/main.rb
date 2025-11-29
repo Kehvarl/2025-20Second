@@ -10,6 +10,8 @@ def init args
   args.state.button = Pushbutton.new({x:500, y:640, w:96, h:96, source_w:64, source_h:32})
   args.state.display = Display.new()
   args.state.count_to = Time.now + 20.0
+
+  args.state.target = Rand(32)
 end
 
 def calculate args
