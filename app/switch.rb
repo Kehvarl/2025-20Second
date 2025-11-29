@@ -7,7 +7,7 @@ class Switch
     @y = args.y || 540
     @w = args.w || 48
     @h = args.h || 96
-    @path = args.path ||  "sprites/switches/run_stop_anim.png"
+    @path = args.path ||  "sprites/on_off_anim.png"
     @source_x = args.source_x || 0
     @source_y = args.source_y || 0
     @source_h = args.source_h || 64
