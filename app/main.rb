@@ -1,5 +1,6 @@
 require 'app/switch.rb'
 require 'app/display.rb'
+require 'app/timer.rb'
 
 def init args
   args.state.game_over = false
@@ -10,8 +11,7 @@ def init args
   end
   args.state.button = Pushbutton.new({x:500, y:640, w:96, h:96, source_w:64, source_h:32})
   args.state.display = Display.new()
-  args.state.count_to = Time.now + 20.0
-
+  args.state.timer = Timer.new({x:280, y:1000, w:50, h:50, time:20.0})
   args.state.target = rand(32)
 end
 
@@ -36,29 +36,10 @@ def calculate args
     args.state.button.status = false
     if output == args.state.target
       args.state.won = true
+      args.state.timer.color_override = {r:0, g:255, b:255}
     end
   end
   return output
-end
-
-def get_timer args
-  timer = args.state.count_to - Time.now
-  if timer <= 0.00
-    timer = 0.00
-    args.state.game_over = true
-  end
-  color = {r:0, g:196, b:0}
-  case timer
-  when 5.0 .. 10.0
-      color = {r:196, g:196, b:0}
-  when 0.0 .. 5.0
-      color = {r:196, g:0, b:0}
-  end
-  if args.state.won
-      color = {r:0, g:196, b:255}
-  end
-
-  return color, ("%.2f" % timer)
 end
 
 def game_over_tick args
@@ -84,6 +65,11 @@ def tick args
 
   args.state.switches.each {|s| s.tick(args)}
   args.state.button.tick(args)
+  args.state.timer.tick(args)
+
+  if args.state.timer.ended
+        args.state.game_over = true
+  end
 
   if args.state.button.status > 0
       calculate(args)
@@ -92,9 +78,8 @@ def tick args
 
   args.outputs.primitives << {x:0, y:0, w:720, h:1280, r:0, g:0, b:0}.solid!
   args.outputs.primitives << args.state.switches
-  color, time = get_timer(args)
-  args.outputs.primitives << {x:430, y:800, w:50, h:50, **color, size_enum: 20, text:"#{time}"}.label!
+
+  args.outputs.primitives << args.state.timer.render
   args.outputs.primitives << args.state.display.render
   args.outputs.primitives << args.state.button
-  args.outputs.primitives << {x:300, y:840, w:64, h:96, path:"sprites/7s-64x96.png"}.sprite!
 end

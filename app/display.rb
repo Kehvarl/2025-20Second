@@ -61,7 +61,6 @@ class Display
     end
 
     def add_line state
-        #y = @y + @h - ((@lines.count+1)*64)
         line = Display_Line.new({x:@x-16, y:0, w:@w, h:20})
         line.store_state(state[0], state[1], state[2])
         @lines.unshift(line)
