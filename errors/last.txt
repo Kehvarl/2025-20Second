@@ -1,20 +1,8 @@
 * EXCEPTION:
-* ERROR - :y= method missing on ~Display_Line~.
-
-#+begin_src ~Display_Line#inspect~
-#<Display_Line:0x1c55a5a0 @segments=5, @h=20, @x=94, @w=500, @y=0, @led_w=32, @led_spacing=8, @led_h=32, @output=[{:x=>128.0, :y=>-6.0, :w=>32, :h=>32, :path=>"sprites/led_gs.png", :r=>128, :g=>128, :b=>128, :primitive_marker=>:sprite}, {:x=>236.0, :y=>-6.0, :w=>32, :h=>32, :path=>"sprites/led_gs.png", :r=>128, :g=>128, :b=>128, :primitive_marker=>:sprite}, {:x=>344.0, :y=>-6.0, :w=>32, :h=>32, :path=>"sprites/led_gs.png", :r=>128, :g=>128, :b=>128, :primitive_marker=>:sprite}, {:x=>452.0, :y=>-6.0, :w=>32, :h=>32, :path=>"sprites/led_gs.png", :r=>128, :g=>128, :b=>128, :primitive_marker=>:sprite}, {:x=>560.0, :y=>-6.0, :w=>32, :h=>32, :path=>"sprites/led_gs.png", :r=>128, :g=>128, :b=>128, :primitive_marker=>:sprite}]>
-#+end_src ~Display_Line#inspect~
+* ERROR:
+Undefined method time for main.
 
 
-
-The method named
-  :y=
-with args
-  [516]
-doesn't exist on [Display_Line, #<Class:#<Display_Line:0x1c55a5a0>>].
-
-(suggestions above)
 ** Backtrace:
-*** app/display.rb:63:in render
-*** app/display.rb:61:in render
-*** app/main.rb:74:in tick
+*** app/main.rb:54:in get_timer
+*** app/main.rb:95:in tick
