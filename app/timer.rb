@@ -1,21 +1,46 @@
 class Timer
-    attr_accessor ended
+    attr_accessor :ended, :color_override
     def initialize args={}
-        @count_to = Time.now + (args.length || 20.0)
+        @x = args.x || 0
+        @y = args.y || 0
+        @w = args.w || 480
+        @h = args.h || 64
+        @color_override = false
+        @time_remaining = args.time || 20.0
+        @count_to = Time.now + @time_remaining
         @ended = false
     end
 
     def tick args
-        timer = @count_to - Time.now
-        if timer <= 0.00
-            timer = 0.00
+        @time_remaining = @count_to - Time.now
+        if @time_remaining <= 0.00
+            @time_remaining = 0.00
             @ended = true
         end
+    end
+
+    def timer_color
+        if @color_override
+            return @color_override
+        end
         color = {r:0, g:196, b:0}
+        case @time_remaining
+        when 5.0 .. 10.0
+            color = {r:196, g:196, b:0}
+        when 0.0 .. 5.0
+            color = {r:196, g:0, b:0}
+        end
+        color
     end
 
     def render
         out = []
+        out << {x:@x-64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
+        out << {x:@x, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
+        out << {x:@x+64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
+        out << {x:@x+128, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
+
+        out << {x:@x, y:@y, w:@w, h:@h, **timer_color(), size_enum: 20, text:"#{"%.2f" % @time_remaining}"}.label!
         out
     end
 end

@@ -1,8 +1,10 @@
 * EXCEPTION:
 * ERROR:
-Undefined method time for main.
+Undefined method args for main. Did you forget to pass in args as a parameter?
 
 
 ** Backtrace:
-*** app/main.rb:54:in get_timer
-*** app/main.rb:95:in tick
+*** app/main.rb:19:in switchline
+*** app/main.rb:18:in switchline
+*** app/main.rb:8:in init
+*** app/main.rb:64:in tick
