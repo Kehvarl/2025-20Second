@@ -1,19 +1,10 @@
 * EXCEPTION:
-* ERROR - :color_override= method missing on ~Timer~.
-
-#+begin_src ~Timer#inspect~
-#<Timer:0x2cdbc400 @count_to=2025-11-30 17:24:56 -0700, @ended=false, @color_override=false, @h=50, @x=430, @time_remaining=10.584018, @w=50, @y=800>
-#+end_src ~Timer#inspect~
+* ERROR:
+Undefined method args for main. Did you forget to pass in args as a parameter?
 
 
-
-The method named
-  :color_override=
-with args
-  [{:r=>0, :g=>255, :b=>255}]
-doesn't exist on [Timer, #<Class:#<Timer:0x2cdbc400>>].
-
-(suggestions above)
 ** Backtrace:
-*** app/main.rb:40:in calculate
-*** app/main.rb:76:in tick
+*** app/main.rb:19:in switchline
+*** app/main.rb:18:in switchline
+*** app/main.rb:8:in init
+*** app/main.rb:64:in tick

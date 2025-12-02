@@ -5,14 +5,20 @@ require 'app/timer.rb'
 def init args
   args.state.game_over = false
   args.state.won = false
-  args.state.switches = []
-  (0...5).each do |x|
-    args.state.switches << Toggle_Switch.new({x:x*50 + 220,y:640, w:48, h:96})
-  end
+  args.state.switches = switchline(4)
   args.state.button = Pushbutton.new({x:500, y:640, w:96, h:96, source_w:64, source_h:32})
   args.state.display = Display.new()
   args.state.timer = Timer.new({x:280, y:1000, w:50, h:50, time:20.0})
-  args.state.target = rand(32)
+  args.state.target = rand(16)
+end
+
+def switchline count
+  line = []
+  start = (720 - (count * 48)).div(2)
+  (0...count).each do |x|
+    line << Toggle_Switch.new({x:x*50 + start,y:640, w:48, h:96})
+  end
+  line
 end
 
 def calculate args
