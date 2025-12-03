@@ -1,10 +1,5 @@
-* EXCEPTION:
-* ERROR:
-Undefined method args for main. Did you forget to pass in args as a parameter?
-
-
+* EXCEPTION: 'set_switches': wrong number of arguments (1 for 2)
 ** Backtrace:
-*** app/main.rb:19:in switchline
-*** app/main.rb:18:in switchline
-*** app/main.rb:8:in init
-*** app/main.rb:64:in tick
+*** app/main.rb:14:in set_switches
+*** app/main.rb:11:in init
+*** app/main.rb:74:in tick
