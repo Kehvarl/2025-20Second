@@ -5,11 +5,19 @@ require 'app/timer.rb'
 def init args
   args.state.game_over = false
   args.state.won = false
-  args.state.switches = switchline(4)
   args.state.button = Pushbutton.new({x:500, y:640, w:96, h:96, source_w:64, source_h:32})
   args.state.display = Display.new()
   args.state.timer = Timer.new({x:280, y:1000, w:50, h:50, time:20.0})
-  args.state.target = rand(16)
+  set_switches(args, 1)
+end
+
+def set_switches(args, count)
+    args.state.switches = switchline(count)
+    args.state.target = generate_target(count)
+end
+
+def generate_target (switch_count)
+  rand(2**switch_count)
 end
 
 def switchline count
@@ -41,8 +49,9 @@ def calculate args
     args.state.display.add_line(states)
     args.state.button.status = false
     if output == args.state.target
-      args.state.won = true
+      #args.state.won = true
       args.state.timer.color_override = {r:0, g:255, b:255}
+      set_switches(args, args.state.switches.size + 1)
     end
   end
   return output
