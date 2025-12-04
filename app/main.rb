@@ -49,7 +49,6 @@ def calculate args
     args.state.display.add_line(states)
     args.state.button.status = false
     if output == args.state.target
-      #args.state.won = true
       args.state.timer.color_override = {r:0, g:255, b:255}
       set_switches(args, args.state.switches.size + 1)
     end
