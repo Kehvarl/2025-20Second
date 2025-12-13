@@ -65,7 +65,12 @@ def game_over_tick args
     else
       args.outputs.primitives << {x:255, y:600, w:50, h:50, r:255, g:196, b:0, size_enum: 16, text:"You Won!"}.label!
     end
+    args.outputs.primitives << {x:230, y:300, w:260, h:80, r:0, g:196, b:0}.solid!
+    args.outputs.primitives << {x:260, y:370, w:80, h:80, r:0, g:0, b:0, size_enum: 20, text:"RESTART"}.label!
 
+    if args.inputs.mouse.button_left and args.inputs.mouse.inside_rect?({x:320, y:300, w:80, h:80})
+      init args
+    end
 end
 
 def tick args
