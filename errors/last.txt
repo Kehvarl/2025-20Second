@@ -1,5 +1,11 @@
-* EXCEPTION: 'set_switches': wrong number of arguments (1 for 2)
+* EXCEPTION:
+~SevenSegnment~ does not look like a rendering primitive.
+
+The object must adhere to AT LEAST ONE of the following be considered a primitive:
+- Object must respond to ~primitive_marker~ returning either ~:solid~, ~:label~, ~:sprite~, ~:line~, or ~:border~.
+- Object must respond to ~:x~, ~:y~, ~:w~, ~:h~, and ~:path~.
+- Object must respond to ~:x~, ~:y~, and ~:text~.
+- Object must implement ~draw_override~.
+
 ** Backtrace:
-*** app/main.rb:14:in set_switches
-*** app/main.rb:11:in init
-*** app/main.rb:74:in tick
+*** app/main.rb:106:in tick

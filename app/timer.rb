@@ -35,10 +35,10 @@ class Timer
 
     def render
         out = []
-        out << {x:@x-64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
-        out << {x:@x, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
-        out << {x:@x+64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
-        out << {x:@x+128, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96.png"}.sprite!
+        out << {x:@x-64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        out << {x:@x, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        out << {x:@x+64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        out << {x:@x+128, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
 
         out << {x:@x, y:@y, w:@w, h:@h, **timer_color(), size_enum: 20, text:"#{"%.2f" % @time_remaining}"}.label!
         out
