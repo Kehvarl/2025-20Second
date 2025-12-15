@@ -9,6 +9,7 @@ class Timer
         @time_remaining = args.time || 20.0
         @count_to = Time.now + @time_remaining
         @ended = false
+        @display = SevenSegmentDisplay.new({x:@x, y:@y, w:@w, h:@h, digits:4})
     end
 
     def tick args
@@ -17,6 +18,9 @@ class Timer
             @time_remaining = 0.00
             @ended = true
         end
+        @display.set_value("#{"%05.2f" % @time_remaining}")
+        c = timer_color()
+        @display.set_color(c.r, c.g, c.b)
     end
 
     def timer_color
@@ -35,12 +39,13 @@ class Timer
 
     def render
         out = []
-        out << {x:@x-64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
-        out << {x:@x, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
-        out << {x:@x+64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
-        out << {x:@x+128, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        #out << {x:@x-64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        #out << {x:@x, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        #out << {x:@x+64, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
+        #out << {x:@x+128, y:@y-@h, w:@w, h:@h, path:"sprites/7s-64x96_background.png"}.sprite!
 
-        out << {x:@x, y:@y, w:@w, h:@h, **timer_color(), size_enum: 20, text:"#{"%.2f" % @time_remaining}"}.label!
+        #out << {x:@x, y:@y, w:@w, h:@h, **timer_color(), size_enum: 20, text:"#{"%.2f" % @time_remaining}"}.label!
+        out << @display.render
         out
     end
 end

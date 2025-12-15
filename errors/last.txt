@@ -1,11 +1,21 @@
 * EXCEPTION:
-~SevenSegnment~ does not look like a rendering primitive.
+* ERROR - :tml method missing on ~SevenSegmentDisplay~.
 
-The object must adhere to AT LEAST ONE of the following be considered a primitive:
-- Object must respond to ~primitive_marker~ returning either ~:solid~, ~:label~, ~:sprite~, ~:line~, or ~:border~.
-- Object must respond to ~:x~, ~:y~, ~:w~, ~:h~, and ~:path~.
-- Object must respond to ~:x~, ~:y~, and ~:text~.
-- Object must implement ~draw_override~.
+#+begin_src ~SevenSegmentDisplay#inspect~
+#<SevenSegmentDisplay:0x650b3b0 @count=4, @digits=[], @h=96, @x=280, @w=256, @y=280>
+#+end_src ~SevenSegmentDisplay#inspect~
 
+
+
+The method named
+  :tml
+doesn't exist on [SevenSegmentDisplay, #<Class:#<SevenSegmentDisplay:0x650b3b0>>].
+
+(suggestions above)
 ** Backtrace:
-*** app/main.rb:106:in tick
+*** app/7segment_display.rb:81:in setup_digits
+*** app/7segment_display.rb:78:in setup_digits
+*** app/7segment_display.rb:72:in initialize
+*** app/timer.rb:12:in initialize
+*** app/main.rb:11:in init
+*** app/main.rb:79:in tick
