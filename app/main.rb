@@ -8,8 +8,7 @@ def init args
   args.state.won = false
   args.state.button = Pushbutton.new({x:500, y:640, w:96, h:96, source_w:64, source_h:32})
   args.state.display = Display.new()
-  args.state.seven = SevenSegnment.new({r: 196, g: 196, b: 0})
-  args.state.timer = Timer.new({x:280, y:1000, w:50, h:50, time:20.0})
+  args.state.timer = Timer.new({x:280, y:1000, w:256, h:96, time:20.0})
   set_switches(args, 1)
 end
 
@@ -103,6 +102,4 @@ def tick args
   args.outputs.primitives << args.state.timer.render
   args.outputs.primitives << args.state.display.render
   args.outputs.primitives << args.state.button
-  args.outputs.primitives << args.state.seven.render
-  args.state.seven.increment
 end

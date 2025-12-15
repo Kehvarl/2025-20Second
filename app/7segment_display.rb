@@ -12,7 +12,7 @@ class SevenSegmentDigit
         @source_h = 96
         set_color(args.r || 255, args.g || 255, args.b || 255)
         @value = 0
-        set_val(args.val || 0)
+        set_value(args.val || 0)
     end
 
     def set_color r, g, b
@@ -21,13 +21,13 @@ class SevenSegmentDigit
         @b = b
     end
 
-    def set_val value
+    def set_value value
         @value = value % 10
         @source_x = @value * @source_w
     end
 
     def increment
-        set_val @value + 1
+        set_value @value + 1
     end
 end
 
@@ -50,7 +50,7 @@ class SevenSegnment
     end
 
     def set_color r, g, b
-        @rigit.set_color r, g, b
+        @digit.set_color r, g, b
     end
 
     def render
@@ -60,3 +60,49 @@ class SevenSegnment
         out
     end
 end
+
+class SevenSegmentDisplay
+    def initialize args={}
+        @x = args.x || 0
+        @y = args.y || 0
+        @w = args.w || 256
+        @h = args.h || 96
+        @count = args.digits || 4
+        @digits = []
+        setup_digits args
+    end
+
+    def setup_digits args
+        tmp = args.copy()
+        dw = @w / @count
+        @count.each do |c|
+            tmp.x =  @x + (dw*c)
+            tmp.w = dw
+            tmp.val = 0
+            @digits << SevenSegnment.new(tmp)
+        end
+    end
+
+    def set_value value
+        value.delete('.').chars.map(&:to_i).each_with_index do |d, i|
+            @digits[i].set_value(d)
+        end
+    end
+
+    def set_digit digit, value
+    end
+
+    def set_color r, g, b
+        @digits.each{|d| d.set_color(r, g, b)}
+    end
+
+    def render
+        out = []
+        @digits.each do |d|
+            out << d.render
+        end
+        out
+    end
+end
+
+
