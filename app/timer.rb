@@ -27,12 +27,12 @@ class Timer
         if @color_override
             return @color_override
         end
-        color = {r:0, g:196, b:0}
+        color = {r:0, g:255, b:0}
         case @time_remaining
         when 5.0 .. 10.0
-            color = {r:196, g:196, b:0}
+            color = {r:255, g:223, b:0}
         when 0.0 .. 5.0
-            color = {r:196, g:0, b:0}
+            color = {r:255, g:64, b:64}
         end
         color
     end
