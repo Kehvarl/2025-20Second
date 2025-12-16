@@ -55,7 +55,7 @@ class SevenSegnment
 
     def render
         out = []
-        out << {x:@x, y:@y, w:@w, h:@h, path:@bgpath}.sprite!
+        out << {x:@x, y:@y, w:@w, h:@h, a:128, path:@bgpath}.sprite!
         out << @digit
         out
     end
